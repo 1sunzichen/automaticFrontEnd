@@ -6,7 +6,7 @@ test("测试加法10等于10",()=>{
   const a={one:1};
   expect(10).toBe(10);
   //expect(a).toBe({one:1});
-  expect(a).toEqual({one:2});
+  expect(a).toEqual({one:1});
 })
 
 //定义
@@ -67,6 +67,3 @@ test('toTorow',()=>{
   expect(throwNewErrorFunc).toThrow();
 })
 
-//  f 测试失败文件
-//  o git修改过的代码
-//  
