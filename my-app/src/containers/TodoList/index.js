@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import Header from './components/Header.js'
 import './style.css'
+import UndoList from './components/Undolist.js'
 export const useUndoList = () => {
   const [undoList, setUndoList] = useState([])
 
@@ -11,17 +12,29 @@ export const useUndoList = () => {
     },
     [undoList]
   )
-
-  return { undoList, addUndoItem }
+  const deleteUndoItem = useCallback(
+    (xindex) => {
+      console.log(undoList, '121221')
+      const undoListCurrent = undoList.filter((item, index) => index !== xindex)
+      setUndoList([...undoListCurrent])
+    },
+    [undoList]
+  )
+  return { undoList, addUndoItem, deleteUndoItem }
 }
 const TodoList = () => {
-  const { addUndoItem, undoList } = useUndoList()
+  const { addUndoItem, undoList, deleteUndoItem } = useUndoList()
   return (
     <div>
       <Header addUndoItem={addUndoItem} />
-      {undoList.map((item, index) => {
+      <UndoList
+        list={undoList}
+        data-test="UndoList"
+        deleteItem={deleteUndoItem}
+      />
+      {/* {undoList.map((item, index) => {
         return <div key={index}>{item}</div>
-      })}
+      })} */}
     </div>
   )
 }
