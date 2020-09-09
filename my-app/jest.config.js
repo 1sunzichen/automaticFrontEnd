@@ -3,7 +3,10 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
   setupFiles: ['react-app-polyfill/jsdom'],
   // 将jest 集成到 enzyme 当中
-  setupFilesAfterEnv: ['./node_modules/jest-enzyme/lib/index.js'],
+  setupFilesAfterEnv: [
+    './node_modules/jest-enzyme/lib/index.js',
+    '<rootDir>/src/util/testSetup.js', //加载共用测试代码
+  ],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',

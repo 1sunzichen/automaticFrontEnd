@@ -1,12 +1,9 @@
 import React from 'react'
-import Adapter from 'enzyme-adapter-react-16'
 // mount集成测试 全渲染；  shallow 单元测试 当前组件渲染
 import TodoList, { useUndoList } from '../../index.js'
 import { renderHook, act } from '@testing-library/react-hooks'
-import Enzyme, { shallow, mount } from 'enzyme'
-Enzyme.configure({
-  adapter: new Adapter(),
-})
+import { shallow, mount } from 'enzyme'
+
 it(' TodoList组件包括 一个UndoList', () => {
   const { result } = renderHook(() => useUndoList())
   expect(result.current.undoList).toEqual([])
