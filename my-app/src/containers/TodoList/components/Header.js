@@ -8,8 +8,10 @@ const Header = (props) => {
     }
   }
   return (
-    <div>
+    <div className="header">
+      孙家奇的TodoList
       <input
+        className="header-input"
         value={currentValue}
         data-test="input"
         onChange={(v) => {

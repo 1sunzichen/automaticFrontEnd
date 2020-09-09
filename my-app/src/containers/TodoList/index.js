@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import Header from './components/Header.js'
+import './style.css'
 export const useUndoList = () => {
   const [undoList, setUndoList] = useState([])
 

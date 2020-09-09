@@ -7,6 +7,12 @@ import Enzyme, { shallow, mount } from 'enzyme'
 Enzyme.configure({
   adapter: new Adapter(),
 })
+//用快照测试 真偷懒啊
+it(' Header渲染样式', () => {
+  const wrapper = shallow(<Header />)
+
+  expect(wrapper).toMatchSnapshot()
+})
 it(' Header组件包括 一个input', () => {
   const wrapper = shallow(<Header />)
   const w = wrapper.find('[data-test="input"]')
