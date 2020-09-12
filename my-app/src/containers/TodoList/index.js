@@ -8,7 +8,7 @@ export const useUndoList = () => {
   const addUndoItem = useCallback(
     (value) => {
       console.log(undoList, '121221')
-      setUndoList([...undoList, value])
+      setUndoList([...undoList, { value: value, status: 'div' }])
     },
     [undoList]
   )
@@ -20,10 +20,70 @@ export const useUndoList = () => {
     },
     [undoList]
   )
-  return { undoList, addUndoItem, deleteUndoItem }
+  const changeStatus = useCallback(
+    (indexStatus) => {
+      const newList = undoList.map((item, index) => {
+        if (index === indexStatus) {
+          return { ...item, status: 'input' }
+        } else {
+          return {
+            ...item,
+          }
+        }
+      })
+      setUndoList([...newList])
+      console.log('changeStatus' + indexStatus, undoList, newList)
+    },
+    [undoList]
+  )
+  const handleBlur = useCallback(
+    (indexBlur) => {
+      const newList = undoList.map((item, index) => {
+        if (index === indexBlur) {
+          return { ...item, status: 'div' }
+        } else {
+          return {
+            ...item,
+          }
+        }
+      })
+      setUndoList([...newList])
+    },
+    [undoList]
+  )
+  const valueChange = useCallback(
+    (indexBlur, text) => {
+      const newList = undoList.map((item, index) => {
+        if (index === indexBlur) {
+          return { value: text, status: 'input' }
+        } else {
+          return {
+            ...item,
+          }
+        }
+      })
+      setUndoList([...newList])
+    },
+    [undoList]
+  )
+  return {
+    undoList,
+    addUndoItem,
+    deleteUndoItem,
+    changeStatus,
+    handleBlur,
+    valueChange,
+  }
 }
 const TodoList = () => {
-  const { addUndoItem, undoList, deleteUndoItem } = useUndoList()
+  const {
+    addUndoItem,
+    undoList,
+    deleteUndoItem,
+    changeStatus,
+    handleBlur,
+    valueChange,
+  } = useUndoList()
   return (
     <div>
       <Header addUndoItem={addUndoItem} />
@@ -31,6 +91,9 @@ const TodoList = () => {
         list={undoList}
         data-test="UndoList"
         deleteItem={deleteUndoItem}
+        changeStatus={changeStatus}
+        handleBlur={handleBlur}
+        valueChange={valueChange}
       />
       {/* {undoList.map((item, index) => {
         return <div key={index}>{item}</div>

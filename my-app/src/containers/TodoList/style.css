@@ -17,3 +17,22 @@
   border-radius: 5px;
   padding: 0 10px;
 }
+.undo-list {
+}
+.undo-list-count {
+  border-radius: 50%;
+}
+.delete {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+.listli {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  width: 37%;
+  padding: 0 10px;
+  margin: 0 auto;
+}
