@@ -1,10 +1,16 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Header from './components/Header.js'
 import './style.css'
 import UndoList from './components/Undolist.js'
+import axios from 'axios'
 export const useUndoList = () => {
   const [undoList, setUndoList] = useState([])
-
+  const initList = useCallback(() => {
+    axios.get('/undoList,json').then((res) => {
+      console.log(res, 'resxqxqxq')
+      setUndoList(res.data)
+    })
+  }, [])
   const addUndoItem = useCallback(
     (value) => {
       console.log(undoList, '121221')
@@ -73,6 +79,7 @@ export const useUndoList = () => {
     changeStatus,
     handleBlur,
     valueChange,
+    initList,
   }
 }
 const TodoList = () => {
@@ -83,7 +90,12 @@ const TodoList = () => {
     changeStatus,
     handleBlur,
     valueChange,
+    initList,
   } = useUndoList()
+  useEffect(() => {
+    initList()
+  }, [initList])
+
   return (
     <div>
       <Header addUndoItem={addUndoItem} />
