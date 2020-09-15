@@ -6,10 +6,13 @@ import axios from 'axios'
 export const useUndoList = () => {
   const [undoList, setUndoList] = useState([])
   const initList = useCallback(() => {
-    axios.get('/undoList,json').then((res) => {
-      console.log(res, 'resxqxqxq')
-      setUndoList(res.data)
-    })
+    // test 他会找 __mock__ 的数据
+    setTimeout(() => {
+      axios.get('/undoList.json').then((res) => {
+        console.log(res, 'resxqxqxq')
+        setUndoList(res.data)
+      })
+    }, 5000)
   }, [])
   const addUndoItem = useCallback(
     (value) => {
